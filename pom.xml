@@ -12,5 +12,6 @@
     <modules>
         <module>cash-machine/cash-machine-domain</module>
         <module>cash-machine/cash-machine-application</module>
+        <module>cash-machine/cash-machine-adapter</module>
     </modules>
 </project>
