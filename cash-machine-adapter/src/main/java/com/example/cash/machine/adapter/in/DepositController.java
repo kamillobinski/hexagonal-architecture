@@ -4,8 +4,8 @@ import com.example.cash.machine.application.port.in.DepositUseCase;
 import com.example.cash.machine.application.port.in.commands.DepositCommand;
 import com.example.cash.machine.domain.events.BalanceEvent;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
@@ -16,7 +16,12 @@ public class DepositController {
 
     private final DepositUseCase depositUseCase;
 
-    @PostMapping("/deposit/{amount}")
+    @GetMapping("/ping")
+    public String ping() {
+        return "SERVER OK";
+    }
+
+    @GetMapping("/deposit/{amount}")
     public BalanceEvent deposit(@PathVariable BigDecimal amount) {
         DepositCommand depositCommand = new DepositCommand(amount);
         return depositUseCase.deposit(depositCommand);
