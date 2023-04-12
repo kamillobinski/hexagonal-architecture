@@ -27,7 +27,7 @@
             <version>${lombok.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.example.cash-machine</groupId>
+            <groupId>com.example</groupId>
             <artifactId>cash-machine-domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
