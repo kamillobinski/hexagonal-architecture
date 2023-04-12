@@ -12,7 +12,7 @@
     <modules>
         <module>cash-machine-domain</module>
         <module>cash-machine-application</module>
-        <module>cash-machine-server</module>
+        <module>cash-machine-bootstrap</module>
         <module>cash-machine-adapter</module>
     </modules>
 </project>
