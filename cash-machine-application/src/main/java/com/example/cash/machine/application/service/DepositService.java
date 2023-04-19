@@ -16,6 +16,6 @@ public class DepositService implements DepositUseCase {
     @Override
     public BalanceEvent deposit(DepositCommand depositCommand) {
         return cashMachine.deposit(com.example.cash.machine.domain.commands.DepositCommand
-                .builder().amount(depositCommand.getAmount()).build());
+                .builder().amount(depositCommand.amount()).build());
     }
 }

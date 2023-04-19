@@ -1,6 +1,6 @@
 package com.example.cash.machine.application.service;
 
-import com.example.cash.machine.application.port.in.commands.WithdrawalComand;
+import com.example.cash.machine.application.port.in.commands.WithdrawalCommand;
 import com.example.cash.machine.application.port.in.WithdrawalUseCase;
 import com.example.cash.machine.domain.entities.CashMachine;
 import com.example.cash.machine.domain.events.BalanceEvent;
@@ -15,8 +15,8 @@ public class WithdrawalService implements WithdrawalUseCase {
 
 
     @Override
-    public BalanceEvent withdrawal(WithdrawalComand withdrawalComand) {
+    public BalanceEvent withdrawal(WithdrawalCommand withdrawalCommand) {
         return cashMachine.withdraw(com.example.cash.machine.domain.commands.WithdrawalCommand
-                .builder().amount(withdrawalComand.getAmount()).build());
+                .builder().amount(withdrawalCommand.amount()).build());
     }
 }

@@ -1,7 +1,7 @@
 package com.example.cash.machine.adapter.in;
 
 import com.example.cash.machine.application.port.in.WithdrawalUseCase;
-import com.example.cash.machine.application.port.in.commands.WithdrawalComand;
+import com.example.cash.machine.application.port.in.commands.WithdrawalCommand;
 import com.example.cash.machine.domain.events.BalanceEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +18,7 @@ public class WithdrawalController {
 
     @PostMapping("/withdraw/{amount}")
     public BalanceEvent withdraw(@PathVariable BigDecimal amount) {
-        WithdrawalComand withdrawalComand = new WithdrawalComand(amount);
-        return withdrawalUseCase.withdrawal(withdrawalComand);
+        WithdrawalCommand withdrawalCommand = new WithdrawalCommand(amount);
+        return withdrawalUseCase.withdrawal(withdrawalCommand);
     }
 }
