@@ -30,7 +30,7 @@ public class CashMachine implements Serializable {
 
     public WithdrawalDepositEvent withdraw(WithdrawalCommand withdrawalCommand) {
         BigDecimal amount = withdrawalCommand.getAmount();
-        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new CashMachineException("Amount cannot be negative");
         }
         if (amount.compareTo(balance) > 0) {
@@ -48,7 +48,7 @@ public class CashMachine implements Serializable {
 
     public WithdrawalDepositEvent deposit(DepositCommand depositCommand) {
         BigDecimal amount = depositCommand.getAmount();
-        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new CashMachineException("Amount cannot be negative");
         }
         BigDecimal newBalance = balance.add(amount);
