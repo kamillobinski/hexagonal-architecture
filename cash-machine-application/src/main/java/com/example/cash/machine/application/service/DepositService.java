@@ -6,26 +6,30 @@ import com.example.cash.machine.application.port.out.LoadCashMachinePort;
 import com.example.cash.machine.application.port.out.SaveCashMachinePort;
 import com.example.cash.machine.domain.entities.CashMachine;
 import com.example.cash.machine.domain.events.WithdrawalDepositEvent;
+import com.example.cash.machine.domain.exception.CashMachineException;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 public class DepositService implements DepositUseCase {
-
-    private CashMachine cashMachine;
 
     private final LoadCashMachinePort loadCashMachinePort;
     private final SaveCashMachinePort saveCashMachinePort;
 
     @Override
     public WithdrawalDepositEvent deposit(DepositCommand depositCommand) {
-        loadCashMachinePort.getById(1L).ifPresent(machine -> cashMachine = machine);
+        Optional<CashMachine> cashMachineOptional = loadCashMachinePort.getById(1L);
 
-        WithdrawalDepositEvent balanceEvent = cashMachine.deposit(
-                com.example.cash.machine.domain.commands.DepositCommand
-                        .builder().amount(depositCommand.amount()).build());
+        if (cashMachineOptional.isPresent()) {
+            WithdrawalDepositEvent balanceEvent = cashMachineOptional.get().deposit(
+                    com.example.cash.machine.domain.commands.DepositCommand
+                            .builder().amount(depositCommand.amount()).build());
+            saveCashMachinePort.save(balanceEvent.getCashMachine());
 
-        saveCashMachinePort.save(balanceEvent.getCashMachine());
-
-        return balanceEvent;
+            return balanceEvent;
+        } else {
+            throw new CashMachineException("Cash machine not found");
+        }
     }
 }
