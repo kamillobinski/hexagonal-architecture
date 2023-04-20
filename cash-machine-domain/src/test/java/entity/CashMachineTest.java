@@ -32,14 +32,14 @@ class CashMachineTest {
     }
 
     @Test
-    void testBalance() {
+    void balance_shouldReturnBalanceEventWithValidProperties() {
         BalanceEvent event = cashMachine.balance();
 
         assertEquals(INITIAL_CASH_MACHINE_BALANCE, event.getCashMachine().getBalance());
     }
 
     @Test
-    void testWithdrawSufficientFunds() {
+    void withdraw_shouldReturnWithdrawalDepositEventWithValidProperties() {
         BigDecimal amountToWithdraw = BigDecimal.valueOf(200);
         WithdrawalCommand withdrawalCommand = WithdrawalCommand.builder().amount(amountToWithdraw).build();
 
@@ -54,7 +54,7 @@ class CashMachineTest {
     }
 
     @Test
-    void testWithdrawInsufficientFunds() {
+    void withdraw_shouldThrowCashMachineExceptionWhenAmountIsGreaterThanBalance() {
         BigDecimal amountToWithdraw = BigDecimal.valueOf(2200);
         WithdrawalCommand withdrawalCommand = WithdrawalCommand.builder().amount(amountToWithdraw).build();
 
@@ -64,7 +64,7 @@ class CashMachineTest {
     }
 
     @Test
-    void testWithdrawZeroFunds() {
+    void withdraw_shouldThrowCashMachineExceptionWhenAmountIsZero() {
         BigDecimal amountToWithdraw = BigDecimal.ZERO;
         WithdrawalCommand withdrawalCommand = WithdrawalCommand.builder().amount(amountToWithdraw).build();
 
@@ -74,7 +74,7 @@ class CashMachineTest {
     }
 
     @Test
-    void testWithdrawNegativeFunds() {
+    void withdraw_shouldThrowCashMachineExceptionWhenAmountIsNegative() {
         BigDecimal amountToWithdraw = BigDecimal.valueOf(-100);
         WithdrawalCommand withdrawalCommand = WithdrawalCommand.builder().amount(amountToWithdraw).build();
 
@@ -84,7 +84,21 @@ class CashMachineTest {
     }
 
     @Test
-    void testDeposit() {
+    void withdraw_shouldThrowCashMachineExceptionWhenBalanceIsZero() {
+        BigDecimal amountToWithdraw = BigDecimal.valueOf(1000);
+        WithdrawalCommand withdrawalCommand = WithdrawalCommand.builder().amount(amountToWithdraw).build();
+        CashMachine zeroBalanceCashMachine = CashMachine.builder()
+                .id(INITIAL_CASH_MACHINE_ID)
+                .balance(BigDecimal.ZERO)
+                .build();
+
+        assertThrows(CashMachineException.class, () -> {
+            zeroBalanceCashMachine.withdraw(withdrawalCommand);
+        });
+    }
+
+    @Test
+    void deposit_shouldReturnWithdrawalDepositEventWithValidProperties() {
         BigDecimal amountToDeposit = BigDecimal.valueOf(200);
         DepositCommand depositCommand = DepositCommand.builder().amount(amountToDeposit).build();
 
@@ -99,7 +113,7 @@ class CashMachineTest {
     }
 
     @Test
-    void testDepositNegativeFunds() {
+    void deposit_shouldThrowCashMachineExceptionWhenAmountIsNegative() {
         BigDecimal amountToDeposit = BigDecimal.valueOf(-100);
         DepositCommand depositCommand = DepositCommand.builder().amount(amountToDeposit).build();
 
@@ -109,7 +123,7 @@ class CashMachineTest {
     }
 
     @Test
-    void testDepositZeroFunds() {
+    void deposit_shouldThrowCashMachineExceptionWhenAmountIsZero() {
         BigDecimal amountToDeposit = BigDecimal.ZERO;
         DepositCommand depositCommand = DepositCommand.builder().amount(amountToDeposit).build();
 
@@ -117,5 +131,4 @@ class CashMachineTest {
             cashMachine.deposit(depositCommand);
         });
     }
-
 }
