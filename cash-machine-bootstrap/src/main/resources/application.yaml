@@ -16,7 +16,7 @@ spring:
         generate_statistics: false
         format_sql: true
     hibernate:
-      ddl-auto:
+      ddl-auto: update
   sql:
     init:
       mode: always
