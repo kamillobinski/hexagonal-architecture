@@ -1,0 +1,1 @@
+INSERT INTO cash_machine (id, balance) VALUES (1, 1000);

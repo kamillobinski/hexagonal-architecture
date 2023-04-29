@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: kamillobinski
+      changes:
+        - sqlFile:
+            path: ../sql/create-initial-data.sql
+            relativeToChangelogFile: true

@@ -35,6 +35,11 @@
             <version>${postgresql.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.example</groupId>
             <artifactId>cash-machine-application</artifactId>
             <version>0.0.1-SNAPSHOT</version>

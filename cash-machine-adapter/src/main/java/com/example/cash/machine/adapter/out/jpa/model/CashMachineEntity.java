@@ -1,9 +1,6 @@
 package com.example.cash.machine.adapter.out.jpa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -14,6 +11,7 @@ import java.math.BigDecimal;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "cash_machine")
 public class CashMachineEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

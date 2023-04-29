@@ -1,1 +1,0 @@
-INSERT INTO cash_machine_entity (id, balance) VALUES (1, 1000);
