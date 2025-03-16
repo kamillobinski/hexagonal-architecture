@@ -174,7 +174,7 @@ Upon making these API calls, you will receive the appropriate response indicatin
 <!-- LICENSE -->
 ## License
 
-This project is currently released without a specific license.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
